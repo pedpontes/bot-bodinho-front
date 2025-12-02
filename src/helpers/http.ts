@@ -1,13 +1,15 @@
-import { Axios } from "axios";
+import axios from "axios";
 
 const PORT = 8080;
+export const BASE_URL = `http://localhost:${PORT}`;
 
 function httpHelper() {
-  const axios = new Axios({
-    baseURL: process.env.NEXT_PUBLIC_API_URL || `http://localhost:${PORT}/api`,
+  const instance = axios.create({
+    baseURL: process.env.NEXT_PUBLIC_API_URL || BASE_URL,
+    withCredentials: true,
   });
 
-  return axios;
+  return instance;
 }
 
 export const bodinhoApi = httpHelper();

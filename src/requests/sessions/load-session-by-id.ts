@@ -5,6 +5,6 @@ export async function LoadSessionByIdRequest(
   id: SessionModel["id"]
 ): Promise<Record<string, SessionModel>> {
   return await bodinhoApi
-    .get(`/sessions/${id}`)
+    .get(`/api/sessions/${id}`)
     .then((response) => response.data);
 }
