@@ -1,11 +1,10 @@
 import { AppLayout } from "@/components/AppLayout";
 
-export default function PrivateLayout({
+export default function PublicLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <AppLayout requireAuth>{children}</AppLayout>
-  );
+  return <AppLayout>{children}</AppLayout>;
 }
+

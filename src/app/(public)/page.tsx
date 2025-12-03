@@ -1,27 +1,11 @@
 "use client";
 
-import { UserProvider, useUser } from "@/contexts/UserProvider";
-import { BASE_URL } from "@/helpers/http";
 import {
-  BarChartOutlined,
   PlayCircleOutlined,
-  RocketOutlined,
   SoundOutlined,
   TeamOutlined,
-  UserOutlined,
 } from "@ant-design/icons";
-import {
-  Avatar,
-  Button,
-  Card,
-  Col,
-  Divider,
-  Row,
-  Space,
-  Typography,
-} from "antd";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { Card, Col, Divider, Row, Typography } from "antd";
 
 const { Title, Paragraph, Text } = Typography;
 
@@ -35,7 +19,6 @@ function HomePage() {
         position: "relative",
       }}
     >
-      <TopRightButtons />
       {/* Hero Section */}
       <div
         style={{
@@ -66,33 +49,6 @@ function HomePage() {
           O melhor bot de música para Discord. Reproduza suas músicas favoritas
           com qualidade cristalina.
         </Paragraph>
-        <Space size="large">
-          <Button
-            type="primary"
-            size="large"
-            icon={<RocketOutlined />}
-            style={{
-              height: "50px",
-              fontSize: "16px",
-              background: "#5865F2",
-              borderColor: "#5865F2",
-            }}
-          >
-            Adicionar ao Discord
-          </Button>
-          <Button
-            size="large"
-            ghost
-            style={{
-              height: "50px",
-              fontSize: "16px",
-              color: "white",
-              borderColor: "white",
-            }}
-          >
-            Ver Documentação
-          </Button>
-        </Space>
       </div>
 
       {/* Features Section */}
@@ -272,65 +228,4 @@ function HomePage() {
     </div>
   );
 }
-
-function TopRightButtons() {
-  const { user, loading, handleLogout } = useUser();
-  const router = useRouter();
-
-  if (loading) {
-    return null;
-  }
-
-  return (
-    <div
-      style={{ position: "absolute", top: "24px", right: "24px", zIndex: 10 }}
-    >
-      <Space>
-        {!user ? (
-          <Button
-            onClick={() => {
-              router.push(
-                process.env.NEXT_PUBLIC_API_URL ||
-                  BASE_URL + "/api/oauth/discord"
-              );
-            }}
-            style={{
-              background: "#5865F2",
-              borderColor: "#5865F2",
-              color: "white",
-            }}
-          >
-            Login com Discord
-          </Button>
-        ) : (
-          <Space>
-            <Link href="/sessions">
-              <Button
-                type="primary"
-                icon={<BarChartOutlined />}
-                style={{
-                  background: "rgba(255,255,255,0.2)",
-                  borderColor: "rgba(255,255,255,0.3)",
-                  backdropFilter: "blur(10px)",
-                }}
-              >
-                Acessar Métricas
-              </Button>
-            </Link>
-            <Avatar icon={<UserOutlined />} />
-            <span style={{ color: "white" }}>{user.username}</span>
-            <Button onClick={handleLogout}>Sair</Button>
-          </Space>
-        )}
-      </Space>
-    </div>
-  );
-}
-
-export default function HomePageWrapper() {
-  return (
-    <UserProvider>
-      <HomePage />
-    </UserProvider>
-  );
-}
+export default HomePage;
