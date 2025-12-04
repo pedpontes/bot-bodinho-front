@@ -6,12 +6,15 @@ const useLocalhost = true;
 export let BASE_URL: string | null;
 
 function httpHelper() {
-  switch (location.hostname) {
+  const hostname = typeof window !== 'undefined' ? window.location.hostname : 'localhost';
+  
+  switch (hostname) {
     case "bot-bodinho-front.vercel.app":
       BASE_URL = "https://bodinho-discord.ddns.net";
+      break;
     default:
-      if (useLocalhost) {
-        BASE_URL = `http://${location.hostname}:${PORT}`;
+      if (useLocalhost && typeof window !== 'undefined') {
+        BASE_URL = `http://${hostname}:${PORT}`;
         break;
       }
       BASE_URL = "https://bodinho-discord.ddns.net";
