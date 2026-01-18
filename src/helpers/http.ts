@@ -10,14 +10,14 @@ function httpHelper() {
   
   switch (hostname) {
     case "bot-bodinho-front.vercel.app":
-      BASE_URL = "https://bodinho-discord.ddns.net";
+      BASE_URL = "https://bodin-discord.ddns.net";
       break;
     default:
       if (useLocalhost && typeof window !== 'undefined') {
         BASE_URL = `http://${hostname}:${PORT}`;
         break;
       }
-      BASE_URL = "https://bodinho-discord.ddns.net";
+      BASE_URL = "https://bodin-discord.ddns.net";
   }
 
   const instance = axios.create({
